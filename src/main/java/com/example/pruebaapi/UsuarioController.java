@@ -1,6 +1,8 @@
 package com.example.pruebaapi;
 
 import com.example.pruebaapi.domain.Usuario;
+import com.example.pruebaapi.dto.UsuarioRequestDTO;
+import com.example.pruebaapi.dto.UsuarioResponseDTO;
 import com.example.pruebaapi.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +19,15 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
     @PostMapping("/usuarios")
-    public Usuario crearUsuario(@Valid @RequestBody Usuario usuario) {
+    public UsuarioResponseDTO crearUsuario(@Valid @RequestBody UsuarioRequestDTO usuario) {
         return usuarioService.crearUsuario(usuario);
     }
     @GetMapping("/usuarios")
-    public List<Usuario> obtenerTodosLosUsuarios() {
+    public List<UsuarioResponseDTO> obtenerTodosLosUsuarios() {
         return usuarioService.obtenerTodosLosUsuarios();
     }
     @PutMapping("/usuarios/{id}")
-    public Usuario actualizarUsuario(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
+    public UsuarioResponseDTO actualizarUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioRequestDTO usuario) {
         return usuarioService.actualizarUsuario(id, usuario);
     }
     @DeleteMapping("/usuarios/{id}")
