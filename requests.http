@@ -1,0 +1,22 @@
+### Crear un nuevo usuario
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+  "nombre": "Ana",
+  "email": "ana@test.com"
+}
+
+### Obtener todos los usuarios
+GET http://localhost:8080/usuarios
+
+### Actualizar el usuario con ID 1
+PUT http://localhost:8080/usuarios/11
+Content-Type: application/json
+
+{
+  "nombre": "Manuel"
+}
+
+### Borrar el usuario con ID 1
+DELETE http://localhost:8080/usuarios/1
