@@ -1,5 +1,6 @@
 package com.example.pruebaapi.exception;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -32,5 +33,8 @@ public class GlobalExceptionHandler {
         }
         return new ResponseEntity<>(mensajeError, HttpStatus.BAD_REQUEST);
     }
-
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> manejarDatosDuplicados(DataIntegrityViolationException ex) {
+        return new ResponseEntity<>("Error: El email ya está en uso.", HttpStatus.CONFLICT);
+    }
 }
