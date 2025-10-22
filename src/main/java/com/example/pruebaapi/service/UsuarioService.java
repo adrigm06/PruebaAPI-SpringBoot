@@ -38,43 +38,56 @@ public class UsuarioService {
     }
 
     public List<UsuarioResponseDTO> obtenerTodosLosUsuarios() {
-        // 1. Obtenemos la lista de ENTIDADES de la BBDD
+        //Obtenemos la lista de ENTIDADES de la BBDD
         List<Usuario> usuarios = usuarioRepository.findAll();
 
-        // 2. Creamos una lista vacía para nuestros DTOs
+        //Creamos una lista vacía para nuestros DTOs
         List<UsuarioResponseDTO> dtos = new ArrayList<>();
 
-        // 3. Recorremos la lista de entidades (el bucle)
+        //Recorremos la lista de entidades (el bucle)
         for (Usuario usuario : usuarios) {
 
-            // 4. Por CADA entidad, creamos un DTO
+            //Por CADA entidad, creamos un DTO
             UsuarioResponseDTO responseDTO = new UsuarioResponseDTO();
             responseDTO.setId(usuario.getId());
             responseDTO.setNombre(usuario.getNombre());
             responseDTO.setEmail(usuario.getEmail());
 
-            // 5. Añadimos el DTO a nuestra lista de DTOs
+            //Añadimos el DTO a nuestra lista de DTOs
             dtos.add(responseDTO);
         }
-
-        // 6. Devolvemos la lista de DTOs ya convertida
+        //Devolvemos la lista de DTOs ya convertida
         return dtos;
+    }
+
+    public UsuarioResponseDTO obtenerUsuarioPorId(Long id) {
+        //Buscamos el usuario por ID
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado."));
+
+        //Convertimos la entidad en un DTO
+        UsuarioResponseDTO responseDTO = new UsuarioResponseDTO();
+        responseDTO.setId(usuario.getId());
+        responseDTO.setNombre(usuario.getNombre());
+        responseDTO.setEmail(usuario.getEmail());
+
+        return responseDTO;
     }
 
     public UsuarioResponseDTO actualizarUsuario(Long id, UsuarioRequestDTO requestDTO) {
 
-        // 1. Buscamos al usuario por ID (¡esto lanza 404 si no existe!)
+        //Buscamos al usuario por ID (¡esto lanza 404 si no existe!)
         Usuario usuarioExistente = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con id: " + id));
 
-        // 2. Actualizamos la entidad con los datos del DTO
+        //Actualizamos la entidad con los datos del DTO
         usuarioExistente.setNombre(requestDTO.getNombre());
         usuarioExistente.setEmail(requestDTO.getEmail());
 
-        // 3. Guardamos la entidad actualizada
+        //Guardamos la entidad actualizada
         Usuario usuarioGuardado = usuarioRepository.save(usuarioExistente);
 
-        // 4. Lo convertimos a DTO para devolverlo
+        //Lo convertimos a DTO para devolverlo
         UsuarioResponseDTO responseDTO = new UsuarioResponseDTO();
         responseDTO.setId(usuarioGuardado.getId());
         responseDTO.setNombre(usuarioGuardado.getNombre());

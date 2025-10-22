@@ -26,6 +26,10 @@ public class UsuarioController {
     public List<UsuarioResponseDTO> obtenerTodosLosUsuarios() {
         return usuarioService.obtenerTodosLosUsuarios();
     }
+    @GetMapping("/usuarios/{id}")
+    public UsuarioResponseDTO obtenerUsuarioPorId(@PathVariable Long id) {
+        return usuarioService.obtenerUsuarioPorId(id);
+    }
     @PutMapping("/usuarios/{id}")
     public UsuarioResponseDTO actualizarUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioRequestDTO usuario) {
         return usuarioService.actualizarUsuario(id, usuario);
