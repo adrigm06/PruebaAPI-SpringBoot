@@ -7,15 +7,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
+import java.util.List;
+
+@Entity //JPA
+@Getter //Lombok
+@Setter //Lombok
+@NoArgsConstructor //Lombok
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //AutoIncrement
     private Long id; //Usar Long porque es null por defecto y no confunde a la BBDD
     private String nombre;
-    @Column(unique = true) // <-- 3. ¡Esta es de BBDD! Debe quedarse.
+    @Column(unique = true)
     private String email;
+    @OneToMany(mappedBy = "usuario")
+    private List<Publicacion> publicaciones;
 }
