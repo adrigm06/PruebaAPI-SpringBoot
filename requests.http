@@ -9,6 +9,7 @@ Content-Type: application/json
 
 ### Obtener todos los usuarios
 GET http://localhost:8080/usuarios
+Authorization: Basic user 1234
 
 ### Actualizar el usuario con ID 1
 PUT http://localhost:8080/usuarios/11
@@ -20,6 +21,7 @@ Content-Type: application/json
 
 ### Borrar el usuario con ID 1
 DELETE http://localhost:8080/usuarios/1
+Authorization: Basic admin 1234
 
 
 
