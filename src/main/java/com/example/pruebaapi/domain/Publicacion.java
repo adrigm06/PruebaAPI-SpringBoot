@@ -19,5 +19,4 @@ public class Publicacion {
     private String contenido;
     @ManyToOne
     private Usuario usuario;
-    private List<Publicacion> publicaciones;
 }

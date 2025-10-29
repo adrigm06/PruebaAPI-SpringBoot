@@ -20,3 +20,33 @@ Content-Type: application/json
 
 ### Borrar el usuario con ID 1
 DELETE http://localhost:8080/usuarios/1
+
+
+
+### Crear una nueva publicacion
+POST http://localhost:8080/publicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Mi Primera Publicacion",
+  "contenido": "¡Hola Mundo desde Spring!",
+  "usuarioId": 2
+}
+
+###Obtener todas las publicaciones
+GET http://localhost:8080/publicaciones
+
+###Obtener una Publicacion por ID
+GET http://localhost:8080/publicaciones/2
+
+###Actualizar una Publicacion
+PUT http://localhost:8080/publicaciones/1
+Content-Type: application/json
+
+{
+  "titulo": "Titulo Editado",
+  "contenido": "Contenido actualizado."
+}
+
+###Borrar una Publicacion
+DELETE http://localhost:8080/publicaciones/3

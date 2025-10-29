@@ -20,6 +20,6 @@ public class Usuario {
     private String nombre;
     @Column(unique = true)
     private String email;
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Publicacion> publicaciones;
 }
